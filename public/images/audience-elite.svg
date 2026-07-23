@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="18%" r="90%">
+      <stop offset="0%" stop-color="#10161b"/>
+      <stop offset="55%" stop-color="#0a0e11"/>
+      <stop offset="100%" stop-color="#040607"/>
+    </radialGradient>
+    <linearGradient id="track" x1="0" y1="430" x2="0" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d1216"/>
+      <stop offset="100%" stop-color="#06090b"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="50%" cy="52%" r="75%">
+      <stop offset="55%" stop-color="#030507" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#030507" stop-opacity="0.62"/>
+    </radialGradient>
+    <filter id="f2" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="f8" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="f18" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="f34" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="34"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <!-- stadium stands silhouette -->
+  <g opacity="0.05" fill="#9fb0ba">
+    <rect x="0" y="296" width="1600" height="2"/>
+    <rect x="0" y="318" width="1600" height="2"/>
+    <rect x="0" y="340" width="1600" height="2"/>
+    <rect x="0" y="362" width="1600" height="2"/>
+  </g>
+
+  <!-- light on the horizon -->
+  <ellipse cx="800" cy="430" rx="420" ry="26" fill="#c8ff3d" opacity="0.12" filter="url(#f18)"/>
+  <ellipse cx="800" cy="430" rx="760" ry="70" fill="#7fae8f" opacity="0.06" filter="url(#f34)"/>
+
+  <!-- overhead beam -->
+  <polygon points="730,0 870,0 1120,780 480,780" fill="#c8ff3d" opacity="0.07" filter="url(#f34)"/>
+
+  <!-- track -->
+  <polygon points="0,1000 430,430 1170,430 1600,1000" fill="url(#track)"/>
+
+  <!-- lane lines converging -->
+  <g stroke="#c8ff3d" stroke-width="5" filter="url(#f2)">
+    <line x1="0" y1="1000" x2="430" y2="430" opacity="0.20"/>
+    <line x1="320" y1="1000" x2="578" y2="430" opacity="0.13"/>
+    <line x1="640" y1="1000" x2="726" y2="430" opacity="0.13"/>
+    <line x1="960" y1="1000" x2="874" y2="430" opacity="0.13"/>
+    <line x1="1280" y1="1000" x2="1022" y2="430" opacity="0.13"/>
+    <line x1="1600" y1="1000" x2="1170" y2="430" opacity="0.20"/>
+  </g>
+
+  <!-- haze over the track -->
+  <ellipse cx="800" cy="570" rx="720" ry="130" fill="#8fa0aa" opacity="0.05" filter="url(#f34)"/>
+
+  <!-- spotlight pool -->
+  <ellipse cx="800" cy="760" rx="430" ry="110" fill="#c8ff3d" opacity="0.06" filter="url(#f34)"/>
+
+  <!-- green energy trail behind the blocks -->
+  <g filter="url(#f8)">
+    <path d="M 470 706 C 560 700 640 712 716 742" stroke="#c8ff3d" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 430 670 C 540 666 630 690 700 730" stroke="#c8ff3d" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.3"/>
+  </g>
+
+  <!-- starting blocks -->
+  <g>
+    <ellipse cx="800" cy="806" rx="330" ry="30" fill="#000000" opacity="0.55" filter="url(#f18)"/>
+    <rect x="600" y="752" width="400" height="16" rx="7" fill="#141a1f" stroke="#2b333a" stroke-width="2"/>
+    <polygon points="640,700 690,700 690,752 612,752" fill="#12171c" stroke="#2b333a" stroke-width="2"/>
+    <polygon points="742,688 792,688 792,752 714,752" fill="#151b21" stroke="#333d45" stroke-width="2"/>
+    <line x1="640" y1="700" x2="690" y2="700" stroke="#c8ff3d" stroke-width="4" opacity="0.9" filter="url(#f2)"/>
+    <line x1="742" y1="688" x2="792" y2="688" stroke="#c8ff3d" stroke-width="4" opacity="0.9" filter="url(#f2)"/>
+    <circle cx="800" cy="760" r="5" fill="#c8ff3d" filter="url(#f2)"/>
+  </g>
+
+  <!-- vignette -->
+  <rect width="1600" height="1000" fill="url(#vig)"/>
+
+  <!-- film grain -->
+  <rect width="1600" height="1000" fill="#ffffff" filter="url(#grain)" opacity="0.35"/>
+</svg>
