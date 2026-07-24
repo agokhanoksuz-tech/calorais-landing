@@ -8,6 +8,7 @@ const AUDIENCES = [
     body: 'You get structure on day one: prepared sessions sized to your level, simple fuel targets, zero ego. Consistency starts before willpower has a chance to run out.',
     image: '/images/audience-beginner.jpg',
     alt: 'Person jogging in a park at sunrise',
+    mono: true,
   },
   {
     tag: 'YEAR TEN',
@@ -15,6 +16,7 @@ const AUDIENCES = [
     body: 'You get nuance: periodized blocks, readiness-gated intensity and fatigue budgets that protect the edge you spent years building — season after season.',
     image: '/images/audience-elite.svg',
     alt: 'Original Calorais artwork — starting blocks under a stadium light',
+    mono: false,
   },
 ];
 
@@ -42,7 +44,9 @@ export default function Audience() {
                 src={a.image}
                 alt={a.alt}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover contrast-110 transition-transform duration-700 group-hover:scale-105"
+                className={`absolute inset-0 w-full h-full object-cover contrast-110 transition-all duration-700 group-hover:scale-105 ${
+                  a.mono ? 'grayscale group-hover:grayscale-0' : ''
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
 

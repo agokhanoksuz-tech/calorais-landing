@@ -138,46 +138,52 @@ export default function ChatPanel({ externalPrompt, onHandledExternal }: Props) 
         </div>
       </div>
 
-      <div ref={scrollRef} className="chat-scroll flex-1 overflow-y-auto px-4 md:px-5 py-5 space-y-5">
-        {messages.map((m, i) =>
-          m.role === 'assistant' ? (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 14, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={bubbleSpring}
-              className="flex gap-3"
-            >
-              <img src="/logo.png" alt="" className="w-7 h-7 shrink-0 rounded-lg mt-0.5" />
-              <div className="rounded-2xl rounded-tl-md bg-steel/50 border border-line px-4 py-3 text-sm leading-relaxed text-white/90 whitespace-pre-line max-w-[85%]">
-                {m.content}
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 14, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={bubbleSpring}
-              className="flex justify-end"
-            >
-              <div className="rounded-2xl rounded-tr-md bg-volt text-ink px-4 py-3 text-sm font-medium max-w-[85%]">
-                {m.content}
-              </div>
-            </motion.div>
-          )
-        )}
+      <div className="relative flex-1 min-h-0">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_85%_80%_at_50%_45%,black,transparent)] pointer-events-none"
+        />
+        <div ref={scrollRef} className="chat-scroll relative h-full overflow-y-auto px-4 md:px-5 py-5 space-y-5">
+          {messages.map((m, i) =>
+            m.role === 'assistant' ? (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 14, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={bubbleSpring}
+                className="flex gap-3"
+              >
+                <img src="/logo.png" alt="" className="w-7 h-7 shrink-0 rounded-lg mt-0.5" />
+                <div className="rounded-2xl rounded-tl-md bg-steel/50 border border-line px-4 py-3 text-sm leading-relaxed text-white/90 whitespace-pre-line max-w-[85%]">
+                  {m.content}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 14, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={bubbleSpring}
+                className="flex justify-end"
+              >
+                <div className="rounded-2xl rounded-tr-md bg-volt text-ink px-4 py-3 text-sm font-medium max-w-[85%]">
+                  {m.content}
+                </div>
+              </motion.div>
+            )
+          )}
 
-        {typing && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
-            <img src="/logo.png" alt="" className="w-7 h-7 shrink-0 rounded-lg mt-0.5" />
-            <div className="rounded-2xl rounded-tl-md bg-steel/50 border border-line px-5 py-4 flex items-center gap-1.5">
-              <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
-              <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
-              <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
-            </div>
-          </motion.div>
-        )}
+          {typing && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
+              <img src="/logo.png" alt="" className="w-7 h-7 shrink-0 rounded-lg mt-0.5" />
+              <div className="rounded-2xl rounded-tl-md bg-steel/50 border border-line px-5 py-4 flex items-center gap-1.5">
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-mist" />
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
 
       <div className="border-t border-line bg-ink/60 px-4 md:px-5 pt-3 pb-4">

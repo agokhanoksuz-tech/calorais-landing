@@ -150,11 +150,11 @@ export default function Hero({ protocol }: { protocol: ProtocolItem[] | null }) 
                   ))}
             </div>
 
-            <div className="px-5 md:px-6 py-3.5 flex items-center justify-between">
+            <div className="px-5 md:px-6 py-3.5 flex items-center justify-between gap-3">
               <span className="font-mono text-[9px] tracking-[0.2em] text-mist/70">
                 ISSUED 06:15 · UPDATES AS YOU LIVE IT
               </span>
-              <span className="font-mono text-[9px] tracking-[0.2em] text-volt animate-pulseline">
+              <span className="font-mono text-[9px] tracking-[0.2em] text-volt animate-pulseline whitespace-nowrap shrink-0">
                 SYSTEM ACTIVE
               </span>
             </div>
@@ -166,7 +166,7 @@ export default function Hero({ protocol }: { protocol: ProtocolItem[] | null }) 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.1 }}
-        className="relative border-t border-line"
+        className="relative border-y border-line"
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
           {CHAPTERS.map((c, i) => (

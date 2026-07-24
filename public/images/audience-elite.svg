@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
   <defs>
     <radialGradient id="bg" cx="50%" cy="18%" r="90%">
-      <stop offset="0%" stop-color="#10161b"/>
-      <stop offset="55%" stop-color="#0a0e11"/>
-      <stop offset="100%" stop-color="#040607"/>
+      <stop offset="0%" stop-color="#1a232b"/>
+      <stop offset="55%" stop-color="#0e1418"/>
+      <stop offset="100%" stop-color="#060a0c"/>
     </radialGradient>
     <linearGradient id="track" x1="0" y1="430" x2="0" y2="1000" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0d1216"/>
-      <stop offset="100%" stop-color="#06090b"/>
+      <stop offset="0%" stop-color="#131b21"/>
+      <stop offset="100%" stop-color="#090d10"/>
     </linearGradient>
     <radialGradient id="vig" cx="50%" cy="52%" r="75%">
       <stop offset="55%" stop-color="#030507" stop-opacity="0"/>
@@ -27,7 +27,7 @@
   <rect width="1600" height="1000" fill="url(#bg)"/>
 
   <!-- stadium stands silhouette -->
-  <g opacity="0.05" fill="#9fb0ba">
+  <g opacity="0.1" fill="#9fb0ba">
     <rect x="0" y="296" width="1600" height="2"/>
     <rect x="0" y="318" width="1600" height="2"/>
     <rect x="0" y="340" width="1600" height="2"/>
@@ -35,30 +35,30 @@
   </g>
 
   <!-- light on the horizon -->
-  <ellipse cx="800" cy="430" rx="420" ry="26" fill="#c8ff3d" opacity="0.12" filter="url(#f18)"/>
-  <ellipse cx="800" cy="430" rx="760" ry="70" fill="#7fae8f" opacity="0.06" filter="url(#f34)"/>
+  <ellipse cx="800" cy="430" rx="420" ry="26" fill="#c8ff3d" opacity="0.22" filter="url(#f18)"/>
+  <ellipse cx="800" cy="430" rx="760" ry="70" fill="#7fae8f" opacity="0.11" filter="url(#f34)"/>
 
   <!-- overhead beam -->
-  <polygon points="730,0 870,0 1120,780 480,780" fill="#c8ff3d" opacity="0.07" filter="url(#f34)"/>
+  <polygon points="730,0 870,0 1120,780 480,780" fill="#c8ff3d" opacity="0.12" filter="url(#f34)"/>
 
   <!-- track -->
   <polygon points="0,1000 430,430 1170,430 1600,1000" fill="url(#track)"/>
 
   <!-- lane lines converging -->
   <g stroke="#c8ff3d" stroke-width="5" filter="url(#f2)">
-    <line x1="0" y1="1000" x2="430" y2="430" opacity="0.20"/>
-    <line x1="320" y1="1000" x2="578" y2="430" opacity="0.13"/>
-    <line x1="640" y1="1000" x2="726" y2="430" opacity="0.13"/>
-    <line x1="960" y1="1000" x2="874" y2="430" opacity="0.13"/>
-    <line x1="1280" y1="1000" x2="1022" y2="430" opacity="0.13"/>
-    <line x1="1600" y1="1000" x2="1170" y2="430" opacity="0.20"/>
+    <line x1="0" y1="1000" x2="430" y2="430" opacity="0.32"/>
+    <line x1="320" y1="1000" x2="578" y2="430" opacity="0.22"/>
+    <line x1="640" y1="1000" x2="726" y2="430" opacity="0.22"/>
+    <line x1="960" y1="1000" x2="874" y2="430" opacity="0.22"/>
+    <line x1="1280" y1="1000" x2="1022" y2="430" opacity="0.22"/>
+    <line x1="1600" y1="1000" x2="1170" y2="430" opacity="0.32"/>
   </g>
 
   <!-- haze over the track -->
-  <ellipse cx="800" cy="570" rx="720" ry="130" fill="#8fa0aa" opacity="0.05" filter="url(#f34)"/>
+  <ellipse cx="800" cy="570" rx="720" ry="130" fill="#8fa0aa" opacity="0.09" filter="url(#f34)"/>
 
   <!-- spotlight pool -->
-  <ellipse cx="800" cy="760" rx="430" ry="110" fill="#c8ff3d" opacity="0.06" filter="url(#f34)"/>
+  <ellipse cx="800" cy="760" rx="430" ry="110" fill="#c8ff3d" opacity="0.11" filter="url(#f34)"/>
 
   <!-- green energy trail behind the blocks -->
   <g filter="url(#f8)">

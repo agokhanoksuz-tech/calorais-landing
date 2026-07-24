@@ -4,7 +4,7 @@ import type { PillarData } from '../lib/types';
 
 export default function Pillars({ pillars }: { pillars: PillarData[] | null }) {
   return (
-    <section id="pillars" className="relative py-20 md:py-28">
+    <section id="pillars" className="relative py-20 md:py-28 border-t border-line">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <ChapterHeading
           num="02"

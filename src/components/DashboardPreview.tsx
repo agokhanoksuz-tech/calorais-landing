@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Dumbbell } from 'lucide-react';
+import { Bike, Dumbbell, Footprints, Waves } from 'lucide-react';
 import ChapterHeading from './ChapterHeading';
 import { api } from '../lib/api';
 import { getIcon } from '../lib/icons';
 import type { DashboardData } from '../lib/types';
+
+function sessionIcon(title: string) {
+  const t = title.toLowerCase();
+  if (/\b(bike|cycle|cycling|spin)\b/.test(t)) return Bike;
+  if (/\b(run|jog|sprint|walk|hike)\b/.test(t)) return Footprints;
+  if (/\b(swim|row|rowing)\b/.test(t)) return Waves;
+  return Dumbbell;
+}
 
 export default function DashboardPreview() {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -193,13 +201,15 @@ export default function DashboardPreview() {
                 </div>
               ) : (
                 <div>
-                  {data?.workouts.map((w) => (
+                  {data?.workouts.map((w) => {
+                    const SessionIcon = sessionIcon(w.title);
+                    return (
                     <div
                       key={w.id}
                       className="flex items-center gap-4 px-5 md:px-6 py-3.5 border-t border-line/60 hover:bg-steel/20 transition-colors"
                     >
                       <span className="w-9 h-9 shrink-0 rounded-lg bg-steel/60 border border-line flex items-center justify-center">
-                        <Dumbbell className="w-4 h-4 text-volt" />
+                        <SessionIcon className="w-4 h-4 text-volt" />
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-semibold text-white truncate">{w.title}</div>
@@ -219,7 +229,8 @@ export default function DashboardPreview() {
                         {w.intensity.toUpperCase()}
                       </span>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
