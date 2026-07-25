@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle2, AlertTriangle, Loader2, ShieldCheck, EyeOff, Cpu } from 'lucide-react';
 import { Magnetic } from './Animated';
 import { api } from '../lib/api';
+import { trackWaitlistSignup } from '../lib/analytics';
 
 const TRUST = [
   { icon: ShieldCheck, text: 'Protected by industry-standard encryption.' },
@@ -46,6 +47,7 @@ export default function CTASection() {
     setStatus('loading');
     try {
       await api.joinWaitlist(clean);
+      trackWaitlistSignup();
       setStatus('success');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong — please try again.');

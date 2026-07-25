@@ -29,7 +29,7 @@ interface Doc {
 const DOCS: Record<Exclude<DocId, 'status'>, Doc> = {
   privacy: {
     title: 'Privacy Policy',
-    updated: 'Last updated · March 2026',
+    updated: 'Last updated · July 2026',
     sections: [
       {
         heading: 'Who we are',
@@ -43,6 +43,7 @@ const DOCS: Record<Exclude<DocId, 'status'>, Doc> = {
           'Account data — your email address and authentication identifiers',
           'Performance data — training, readiness, nutrition and recovery metrics you log',
           'Device & usage data — anonymized diagnostics that keep the system stable',
+          'Optional website analytics — page views, device category and referral source, collected only after you allow analytics',
           'Early-access data — your email address, processed with your consent',
         ],
       },
@@ -66,7 +67,7 @@ const DOCS: Record<Exclude<DocId, 'status'>, Doc> = {
       {
         heading: 'Processors & storage',
         body: [
-          'Data is processed by tightly vetted sub-processors (cloud hosting, transactional email) under data-processing agreements. Content is stored encrypted, with daily encrypted backups.',
+          'Data is processed by tightly vetted sub-processors (cloud hosting, transactional email and, only with your permission, Google Analytics) under data-processing terms. Analytics never receives the email address submitted to our waitlist. Content is stored encrypted, with daily encrypted backups.',
         ],
       },
       {

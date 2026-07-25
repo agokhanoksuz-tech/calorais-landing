@@ -12,6 +12,7 @@ import CoachSection from './components/CoachSection';
 import Pricing from './components/Pricing';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import AnalyticsConsent from './components/AnalyticsConsent';
 import { ScrollProgress } from './components/Animated';
 import { api } from './lib/api';
 import type { Narrative } from './lib/types';
@@ -45,6 +46,7 @@ export default function App() {
         <CTASection />
       </main>
       <Footer />
+      <AnalyticsConsent />
     </div>
   );
 }
