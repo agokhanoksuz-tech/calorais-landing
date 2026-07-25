@@ -6,11 +6,23 @@ import type {
   WaitlistResponse,
   Narrative,
 } from './types';
+import { FALLBACK_DASHBOARD, FALLBACK_NARRATIVE, FALLBACK_PLANS } from './fallback-data';
 
 async function getJSON<T>(url: string): Promise<T> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Data could not be loaded');
-  return res.json() as Promise<T>;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Data could not be loaded');
+    return res.json() as Promise<T>;
+  } catch (error) {
+    // Marketing previews must remain complete when the optional Supabase
+    // content source is sleeping or temporarily unavailable. Mutating
+    // endpoints still fail normally so we never report a fake success.
+    if (url === '/api/narrative') return FALLBACK_NARRATIVE as T;
+    if (url === '/api/dashboard') return FALLBACK_DASHBOARD as T;
+    if (url === '/api/plans') return FALLBACK_PLANS as T;
+    if (url.startsWith('/api/chat?')) return [] as T;
+    throw error;
+  }
 }
 
 async function postJSON<T>(url: string, body: unknown): Promise<T> {
