@@ -102,6 +102,10 @@ function buildReply(message) {
   return pick(FALLBACKS);
 }
 
+function isMissingChatTable(error) {
+  return error?.code === 'PGRST205';
+}
+
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
@@ -117,6 +121,9 @@ export default async function handler(req, res) {
         .eq('session_id', sessionId)
         .order('created_at', { ascending: true })
         .limit(50);
+      // Chat history is optional on the marketing site. Keep the coach usable
+      // when the persistence table has not been provisioned yet.
+      if (isMissingChatTable(error)) return res.status(200).json([]);
       if (error) throw error;
       return res.status(200).json(data);
     }
@@ -133,14 +140,19 @@ export default async function handler(req, res) {
       const { error: userError } = await supabase
         .from('chat_messages')
         .insert({ session_id: sessionId, role: 'user', content: text, created_at: now });
-      if (userError) throw userError;
+      if (userError && !isMissingChatTable(userError)) throw userError;
 
       const reply = buildReply(text);
       const replyAt = new Date(Date.now() + 1200).toISOString();
-      const { error: botError } = await supabase
-        .from('chat_messages')
-        .insert({ session_id: sessionId, role: 'assistant', content: reply, created_at: replyAt });
-      if (botError) throw botError;
+      // If the first insert established that persistence is unavailable, do
+      // not make a second failing request. The reply itself is deterministic
+      // and does not depend on stored history.
+      if (!isMissingChatTable(userError)) {
+        const { error: botError } = await supabase
+          .from('chat_messages')
+          .insert({ session_id: sessionId, role: 'assistant', content: reply, created_at: replyAt });
+        if (botError && !isMissingChatTable(botError)) throw botError;
+      }
 
       return res.status(201).json({ role: 'assistant', content: reply, created_at: replyAt });
     }
