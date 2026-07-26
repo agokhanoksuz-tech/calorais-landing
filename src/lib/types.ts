@@ -82,6 +82,7 @@ export interface GeneratePlanResponse {
 export interface WaitlistResponse {
   ok: boolean;
   count: number;
+  email_sent: boolean;
 }
 
 export interface ProtocolItem {

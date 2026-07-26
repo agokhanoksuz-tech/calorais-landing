@@ -17,6 +17,7 @@ Configure these required environment variables in the Vercel project settings:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY` (required for the waitlist welcome email)
 
 The database wake/restore hook is disabled unless both optional variables below are configured:
 

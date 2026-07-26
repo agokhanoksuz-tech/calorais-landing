@@ -35,6 +35,7 @@ const FIRST_24H = [
 export default function CTASection() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async () => {
@@ -46,7 +47,8 @@ export default function CTASection() {
     setError(null);
     setStatus('loading');
     try {
-      await api.joinWaitlist(clean);
+      const result = await api.joinWaitlist(clean);
+      setEmailSent(result.email_sent);
       trackWaitlistSignup();
       setStatus('success');
     } catch (e) {
@@ -109,7 +111,9 @@ export default function CTASection() {
                     Welcome aboard.
                   </div>
                   <p className="mt-2 text-sm text-white/80">
-                    Check your inbox — your account is ready, and a real person said hello.
+                    {emailSent
+                      ? 'Your place is confirmed. Check your inbox for a note from Calorais.'
+                      : 'Your place on the early-access waitlist is confirmed.'}
                   </p>
                 </motion.div>
               ) : (
