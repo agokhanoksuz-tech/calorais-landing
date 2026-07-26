@@ -2,14 +2,20 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Instagram,
-  Twitter,
-  Youtube,
   X,
   Mail,
   HeartHandshake,
   ArrowUpRight,
   ShieldCheck,
 } from 'lucide-react';
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.6 5.82a4.85 4.85 0 0 0 2.83 1.44v3.1a7.93 7.93 0 0 1-2.83-.63v5.57a6.05 6.05 0 1 1-5.22-5.99v3.14a2.95 2.95 0 1 0 2.09 2.82V2h3.13v3.82Z" />
+    </svg>
+  );
+}
 
 type DocId = 'privacy' | 'terms' | 'support' | 'delete' | 'security' | 'status' | 'licenses';
 
@@ -386,15 +392,22 @@ export default function Footer() {
             </div>
             <div className="mt-6 flex gap-3">
               {[
-                { icon: Instagram, href: 'https://www.instagram.com', label: 'Instagram' },
-                { icon: Twitter, href: 'https://x.com', label: 'X' },
-                { icon: Youtube, href: 'https://www.youtube.com', label: 'YouTube' },
+                {
+                  icon: Instagram,
+                  href: 'https://www.instagram.com/caloraisai/',
+                  label: 'Calorais on Instagram',
+                },
+                {
+                  icon: TikTokIcon,
+                  href: 'https://www.tiktok.com/@calorais',
+                  label: 'Calorais on TikTok',
+                },
               ].map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-10 h-10 rounded-xl border border-line text-mist flex items-center justify-center hover:border-volt/60 hover:text-volt hover:-translate-y-0.5 transition-all"
                 >
