@@ -1,4 +1,5 @@
 import supabase from './db-client.js';
+import { FALLBACK_PLANS, isMissingTable } from './fallback-data.js';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -9,6 +10,7 @@ export default async function handler(req, res) {
         .from('plan_tiers')
         .select('*')
         .order('price', { ascending: true });
+      if (isMissingTable(error)) return res.status(200).json(FALLBACK_PLANS);
       if (error) throw error;
       return res.status(200).json(data);
     }

@@ -1,4 +1,5 @@
 import supabase from './db-client.js';
+import { FALLBACK_NARRATIVE, isMissingTable } from './fallback-data.js';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -12,11 +13,9 @@ export default async function handler(req, res) {
         supabase.from('principles').select('*').order('id', { ascending: true }),
         supabase.from('athlete_quotes').select('*').order('id', { ascending: true }),
       ]);
-      if (protocol.error) throw protocol.error;
-      if (pillars.error) throw pillars.error;
-      if (timeline.error) throw timeline.error;
-      if (principles.error) throw principles.error;
-      if (quotes.error) throw quotes.error;
+      const errors = [protocol.error, pillars.error, timeline.error, principles.error, quotes.error].filter(Boolean);
+      if (errors.some(isMissingTable)) return res.status(200).json(FALLBACK_NARRATIVE);
+      if (errors.length) throw errors[0];
       return res.status(200).json({
         protocol: protocol.data,
         pillars: pillars.data,

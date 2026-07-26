@@ -1,4 +1,5 @@
 import supabase from './db-client.js';
+import { FALLBACK_DASHBOARD, isMissingTable } from './fallback-data.js';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -10,9 +11,9 @@ export default async function handler(req, res) {
         supabase.from('weekly_activity').select('*').order('id', { ascending: true }),
         supabase.from('recent_workouts').select('*').order('id', { ascending: false }).limit(5),
       ]);
-      if (metricsRes.error) throw metricsRes.error;
-      if (activityRes.error) throw activityRes.error;
-      if (workoutsRes.error) throw workoutsRes.error;
+      const errors = [metricsRes.error, activityRes.error, workoutsRes.error].filter(Boolean);
+      if (errors.some(isMissingTable)) return res.status(200).json(FALLBACK_DASHBOARD);
+      if (errors.length) throw errors[0];
       return res.status(200).json({
         metrics: metricsRes.data,
         activity: activityRes.data,
